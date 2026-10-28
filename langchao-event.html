@@ -216,13 +216,14 @@
   .film:nth-child(even){grid-template-columns:1fr 1.1fr}
   .film:nth-child(even) .film__media{order:2}
   .film__media{
-    position:relative;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;
+    position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;
     background:var(--night-700) center/cover no-repeat;
     box-shadow:0 30px 60px rgba(0,0,0,.4);
   }
   /* 圖片：把 images/ 資料夾放在同一層，檔名對上即可 */
   .film__media img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:transform 1.6s var(--ease)}
   .reveal-mask.in img{transform:scale(1)}
+  .film__media--square{aspect-ratio:1/1}
   /* 劇照連到 YouTube 預告片 */
   .film__play{position:absolute;inset:0;display:block}
   .film__play::after{
@@ -343,7 +344,8 @@
   .other-input{margin-top:12px;display:none}
   .other-input.show{display:block;animation:fadeUp .5s var(--ease)}
 
-  .check{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+  /* 要寫 .field label.check，不然會被上面 .field label{display:block} 蓋掉，勾選框被撐成整條 */
+  .check,.field label.check{display:flex;gap:12px;align-items:flex-start;cursor:pointer;margin-bottom:0}
   .check input{position:absolute;opacity:0}
   .check .box{
     flex:0 0 22px;height:22px;border-radius:7px;border:1.5px solid var(--text-dim);
@@ -438,7 +440,7 @@
   <!-- ================= 介紹 ================= -->
   <section class="section" id="intro-yilan">
     <article class="film">
-      <div class="film__media reveal-mask">
+      <div class="film__media film__media--square reveal-mask">
         <img src="公播.jpg" alt="影像宜蘭">
       </div>
       <div class="film__text reveal reveal--right">
@@ -663,15 +665,19 @@ window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
 /* ---------- 進場動畫 ---------- */
+// .reveal-mask 一開始被 clip-path 完全遮住，有些瀏覽器會判定成「看不到」而永遠不觸發，
+// 所以改成觀察它的外層，再把 .in 加回 .reveal-mask 本身
+const maskOf = new Map();
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    if (e.isIntersecting) { (maskOf.get(e.target) || e.target).classList.add('in'); io.unobserve(e.target); }
   });
 }, { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal, .reveal-mask').forEach((el, i) => {
   // 同一組的卡片錯開出現
   if (el.classList.contains('info-card')) el.style.transitionDelay = (i % 3) * 0.12 + 's';
-  io.observe(el);
+  if (el.classList.contains('reveal-mask')) { maskOf.set(el.parentElement, el); io.observe(el.parentElement); }
+  else io.observe(el);
 });
 
 /* ---------- 表單 ---------- */
@@ -709,18 +715,20 @@ function validate(){
   return !firstBad;
 }
 
-/* 👉 後台串接：把這裡改成你的 API 網址 */
+/* 👉 後台串接：貼上 Google Apps Script 部署後的「網頁應用程式網址」（結尾是 /exec） */
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycby1QlKpbiX9Utu4nk2GNC9tF_JUsgqx0CI65ENvYQuM8PShwnaIlLucqpeFmP5ezwI/exec';
+
 async function submitToServer(data){
-  // 範例：
-  // const res = await fetch('/api/signup', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(data)
-  // });
-  // if (!res.ok) throw new Error('報名失敗');
-  // return res.json();
-  console.log('送出資料：', data);
-  return new Promise(r => setTimeout(r, 900)); // 假裝送出，接好後台後刪掉
+  if (!SHEET_API_URL) throw new Error('還沒設定 SHEET_API_URL');
+  // 用 text/plain 送，瀏覽器才不會先發 CORS 預檢請求（Apps Script 不支援預檢）
+  const res = await fetch(SHEET_API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(data)
+  });
+  const result = await res.json();
+  if (!result.ok) throw new Error(result.error || '報名失敗');
+  return result;
 }
 
 form.addEventListener('submit', async e => {
