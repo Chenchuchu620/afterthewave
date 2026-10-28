@@ -242,6 +242,10 @@
   .film__title{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:.08em;margin:10px 0 6px}
   .film__tag{color:var(--moon);letter-spacing:.2em;font-size:.95rem;margin-bottom:18px}
   .film__desc{color:var(--text-dim)}
+  .film__meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:-6px 0 16px;font-size:.9rem;color:var(--text)}
+  .film__meta span{font-size:.75rem;letter-spacing:.3em;color:var(--sand)}
+  .film__meta i{width:1px;height:12px;background:var(--line);margin:0 4px}
+
   .film__link{margin-top:18px;color:var(--text-dim)}
   .film__link a{color:var(--moon);text-decoration:none;border-bottom:1px dashed var(--sand);word-break:break-all}
   .film__link a:hover{border-bottom-style:solid}
@@ -317,7 +321,7 @@
   .field{margin-bottom:26px}
   .field label,.field legend{display:block;font-weight:500;margin-bottom:10px}
   .req{color:var(--moon);margin-left:4px}
-  .field input[type=text],.field input[type=tel],.field input[type=email],.field select{
+  .field input[type=text],.field input[type=tel],.field input[type=email],.field input[type=number],.field select{
     width:100%;padding:14px 18px;border-radius:14px;
     border:1px solid var(--line);background:rgba(255,255,255,.04);
     color:var(--text);font:inherit;outline:none;
@@ -383,6 +387,42 @@
      ========================================================= */
   footer{padding:60px clamp(16px,6vw,96px);border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;color:var(--text-dim);font-size:.9rem}
   footer strong{color:var(--text);font-size:1.05rem}
+  .footer__left{display:flex;flex-direction:column;gap:12px}
+  .social{display:flex;gap:10px;flex-wrap:wrap}
+  .social a{
+    width:40px;height:40px;border-radius:50%;display:grid;place-items:center;
+    border:1px solid var(--line);color:var(--text-dim);transition:all .3s var(--ease);
+  }
+  .social a:hover{color:var(--night-900);background:var(--moon);border-color:var(--moon);transform:translateY(-3px)}
+  .social svg{width:19px;height:19px}
+  .footer__right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;text-align:right}
+  .footer__links{display:flex;gap:18px}
+  .footer__links a,.privacy-note a{color:var(--sand);text-decoration:none;border-bottom:1px dashed currentColor}
+  .footer__links a:hover,.privacy-note a:hover{color:var(--moon)}
+  footer small{font-size:.8rem;opacity:.7}
+  @media (max-width:600px){.footer__right{align-items:flex-start;text-align:left}}
+
+  .privacy-note{font-size:.85rem;color:var(--text-dim);margin-bottom:14px}
+
+  /* 隱私權／著作權說明視窗 */
+  .legal{
+    width:min(680px,calc(100% - 32px));max-height:min(80vh,800px);margin:auto;padding:clamp(28px,5vw,48px);
+    border:1px solid var(--line);border-radius:24px;background:var(--night-800);color:var(--text);
+    box-shadow:0 40px 80px rgba(0,0,0,.5);overflow-y:auto;line-height:1.8;color-scheme:dark;
+  }
+  .legal::backdrop{background:rgba(10,14,20,.7);backdrop-filter:blur(4px)}
+  .legal[open]{animation:fadeUp .4s var(--ease)}
+  .legal h2{font-family:"Noto Serif TC",serif;font-size:1.6rem;letter-spacing:.1em}
+  .legal__date{font-size:.8rem;color:var(--text-dim);margin-bottom:18px}
+  .legal h3{font-size:1rem;color:var(--sand);margin:22px 0 6px}
+  .legal p,.legal li{color:var(--text-dim);font-size:.93rem}
+  .legal ul{padding-left:1.2em}
+  .legal b{color:var(--text);font-weight:500}
+  .legal__close{
+    position:sticky;top:0;float:right;width:36px;height:36px;margin:-12px -12px 0 0;border-radius:50%;
+    border:1px solid var(--line);background:var(--night-700);color:var(--text);font-size:1.3rem;line-height:1;cursor:pointer;
+  }
+  .legal__close:hover{border-color:var(--moon);color:var(--moon)}
 
   /* 減少動態偏好 */
   @media (prefers-reduced-motion:reduce){
@@ -446,6 +486,7 @@
       <div class="film__text reveal reveal--right">
         <p class="eyebrow">Screening</p>
         <h2 class="section__title">影像宜蘭</h2>
+        <p class="film__desc" style="margin-top:18px">一個用影像連結生命、生活與地方，並將所發現的故事用影像表達出來的學習平台。<br>這裡提供「紀錄片完整製作」的學習課程。<br>只要你想學習用影像說故事，歡迎你/妳加入影像宜蘭行列～</p>
         <p class="film__link">更多公播場次 → <a href="https://www.facebook.com/projectyilan" target="_blank" rel="noopener">facebook.com/projectyilan</a></p>
       </div>
     </article>
@@ -469,7 +510,8 @@
           <div class="film__no">01</div>
           <h3 class="film__title">山上有座廟<br>廟裡有貴仁</h3>
           <p class="film__tag">六旬女兒追憶討海父親與田都元帥</p>
-          <p class="film__desc">（在這裡填寫影片簡介、導演、片長等資訊。）</p>
+          <p class="film__meta"><span>導演</span>陳楚珺<i></i><span>片長</span>13’</p>
+          <p class="film__desc">由青年影像創作者陳楚珺擔任導演與獨立製作，秉持對家族記憶的深刻眷戀，以女性視角走入南方澳山海，透過母女心靈對話，捕捉討海人堅韌生命力與在地庶民信仰的幽微光芒。</p>
         </div>
       </article>
 
@@ -483,7 +525,8 @@
           <div class="film__no">02</div>
           <h3 class="film__title">海海人生</h3>
           <p class="film__tag">網起的不只是漁獲，探問這片海的未來</p>
-          <p class="film__desc">（在這裡填寫影片簡介、導演、片長等資訊。）</p>
+          <p class="film__meta"><span>導演</span>胡瀚臨．黃建圖．夏朔艷<i></i><span>片長</span>30’</p>
+          <p class="film__desc">一位船長在捕魚時發現海洋垃圾越來越多，影片跟隨船長的勞動與心境，探問地方如何面對或共同承擔海洋的未來。</p>
         </div>
       </article>
 
@@ -497,7 +540,8 @@
           <div class="film__no">03</div>
           <h3 class="film__title">大坑罟的月光騎士</h3>
           <p class="film__tag">夜探陸蟹體驗</p>
-          <p class="film__desc">（在這裡填寫影片簡介、導演、片長等資訊。）</p>
+          <p class="film__meta"><span>導演</span>許惠萍．林振瑋<i></i><span>片長</span>17’</p>
+          <p class="film__desc">林振瑋剛從台北移居到蘇澳，對於在地的各種新鮮事物充滿好奇，許惠萍也是疫情期間回鄉後，開始發現故鄉的美好。</p>
           <span class="film__note">👟 請穿布鞋、長褲，有頭燈請攜帶</span>
         </div>
       </article>
@@ -542,7 +586,7 @@
     <div class="info-cards">
       <div class="info-card reveal"><span>日期</span><p>2026 年 11 月 14 日（六）</p></div>
       <div class="info-card reveal"><span>地點</span><p><a href="https://maps.google.com/?q=宜蘭縣蘇澳鎮大成路58號" target="_blank" rel="noopener">宜蘭縣蘇澳鎮大成路58號</a></p></div>
-      <div class="info-card reveal"><span>主辦</span><p>大坑罟社區發展協會</p></div>
+      <div class="info-card reveal"><span>協力單位</span><p>大坑罟社區發展協會</p></div>
     </div>
   </section>
 
@@ -564,6 +608,12 @@
           <label for="name">姓名<span class="req">*</span></label>
           <input type="text" id="name" name="name" placeholder="請輸入您的姓名" autocomplete="name">
           <p class="err-msg">請填寫姓名</p>
+        </div>
+
+        <div class="field" data-field="people">
+          <label for="people">報名人數<span class="req">*</span><span class="hint">（含自己，全部一起來的人數）</span></label>
+          <input type="number" id="people" name="people" min="1" max="20" step="1" value="1" inputmode="numeric">
+          <p class="err-msg">請填寫 1～20 之間的人數</p>
         </div>
 
         <div class="field" data-field="referrer">
@@ -609,6 +659,7 @@
           <p class="err-msg">請勾選</p>
         </div>
 
+        <p class="privacy-note">送出報名即表示您已閱讀並同意<a href="#privacy" data-open="privacy">隱私權說明</a>，您填寫的資料僅用於本次活動。</p>
         <button type="submit" class="btn btn--moon submit" id="submitBtn">送出報名</button>
       </form>
 
@@ -622,9 +673,67 @@
 </main>
 
 <footer>
-  <div><strong>大坑罟社區發展協會</strong><br>宜蘭縣蘇澳鎮大成路58號</div>
-  <div>浪潮之後・與海有約　2026.11.14</div>
+  <div class="footer__left">
+    <strong>陳楚楚 ChenChuChu</strong>
+    <nav class="social" aria-label="社群連結">
+      <a href="https://www.instagram.com/chenchuchu.tw/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://www.threads.com/@chenchuchu.tw" target="_blank" rel="noopener" aria-label="Threads" title="Threads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 11.2c-.4-2.4-2-3.7-4.4-3.7-2.6 0-4.2 1.7-4.2 4.5s1.6 4.8 4.4 4.8c2.2 0 3.7-1.2 3.7-3 0-1.7-1.4-2.7-3.4-2.7-1.6 0-2.7.8-2.7 1.9 0 1 .9 1.6 2 1.6 2.4 0 3.5-2 3.5-5"/><path d="M20 12c0 5-3 8.5-8 8.5S4 17 4 12s3-8.5 8-8.5c3.6 0 6 1.7 7.2 4.6"/></svg></a>
+      <a href="https://www.facebook.com/profile.php?id=61556122362341" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H9v3h2.5V21"/></svg></a>
+      <a href="https://www.youtube.com/@ChenChuChu_tw" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.2 9.3v5.4l4.6-2.7z" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://lin.ee/G4xFp8H" target="_blank" rel="noopener" aria-label="LINE 官方帳號" title="LINE 官方帳號"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4C7 4 3 7.2 3 11.1c0 3.5 3.1 6.4 7.4 7 .3.1.7.2.8.5.1.3 0 .7 0 .9l-.1.8c0 .3-.2 1 .9.5s5.9-3.5 8-5.9c1.5-1.6 2-3.1 2-3.8C21 7.2 17 4 12 4z"/><path d="M7.5 9.5v3.2h1.8M10.6 9.5v3.2M12.4 12.7V9.5l2.2 3.2V9.5M17.6 9.5h-1.8v3.2h1.8M15.8 11.1h1.6" stroke-width="1.2"/></svg></a>
+      <a href="https://linktr.ee/chenchuchu" target="_blank" rel="noopener" aria-label="Linktree" title="Linktree"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v7.5M6.5 5.5 12 10.5l5.5-5M4 10.5h16M6.5 16 12 11l5.5 5M12 13v8"/></svg></a>
+    </nav>
+  </div>
+  <div class="footer__right">
+    <div>浪潮之後・與海有約　2026.11.14</div>
+    <nav class="footer__links"><a href="#privacy" data-open="privacy">隱私權說明</a><a href="#terms" data-open="terms">著作權與使用聲明</a></nav>
+    <small>© 2026 陳楚楚 ChenChuChu. All rights reserved.</small>
+  </div>
 </footer>
+
+<!-- ================= 隱私權說明 ================= -->
+<dialog class="legal" id="privacy" aria-labelledby="privacyTitle">
+  <button class="legal__close" type="button" aria-label="關閉">×</button>
+  <h2 id="privacyTitle">隱私權說明</h2>
+  <p class="legal__date">最後更新：2026 年 10 月</p>
+  <p>依《個人資料保護法》第 8 條，在您填寫報名表之前，我們向您說明以下事項：</p>
+  <h3>一、蒐集者</h3>
+  <p>本網站為陳楚楚 ChenChuChu 個人建置與維護，報名資料由陳楚楚保管，僅供「浪潮之後・與海有約」活動使用。</p>
+  <h3>二、蒐集目的</h3>
+  <p>活動報名、人數統計與場地餐點準備、活動行前通知（僅限有留 email 者），以及活動成果紀錄。</p>
+  <h3>三、蒐集的資料</h3>
+  <p>姓名、報名人數、介紹人、得知活動的管道、email（選填），以及您對穿著須知與現場拍攝的確認。</p>
+  <h3>四、利用期間、地區、對象與方式</h3>
+  <ul>
+    <li><b>期間：</b>自報名起至活動結束後 3 個月，期滿即刪除。</li>
+    <li><b>地區：</b>資料存放於 Google 試算表，伺服器可能位於台灣以外地區。</li>
+    <li><b>對象：</b>僅限陳楚楚及協助本活動的工作人員，不會提供給其他第三方，也不會用於商業行銷。</li>
+    <li><b>方式：</b>以電子方式儲存與整理，用於上述目的。</li>
+  </ul>
+  <h3>五、現場拍攝</h3>
+  <p>活動現場將進行拍照與錄影，影像可能用於活動紀錄與非營利宣傳。若您不希望入鏡，請於現場告知工作人員。</p>
+  <h3>六、您的權利</h3>
+  <p>依個資法第 3 條，您可以隨時請求查詢、閱覽、補充、更正、停止使用或刪除您的資料。請來信：<b><a href="mailto:iris27work@gmail.com">iris27work@gmail.com</a></b></p>
+  <h3>七、不提供資料的影響</h3>
+  <p>若未填寫必填欄位，將無法完成報名。email 為選填，不填寫不影響報名，但不會收到行前提醒。</p>
+</dialog>
+
+<!-- ================= 著作權與使用聲明 ================= -->
+<dialog class="legal" id="terms" aria-labelledby="termsTitle">
+  <button class="legal__close" type="button" aria-label="關閉">×</button>
+  <h2 id="termsTitle">著作權與使用聲明</h2>
+  <p class="legal__date">最後更新：2026 年 10 月</p>
+  <h3>一、網站著作權</h3>
+  <p>本網站之設計、版面、程式與文字內容，著作權屬陳楚楚 ChenChuChu 所有。未經書面同意，請勿重製、改作或用於商業用途。</p>
+  <h3>二、影片與圖片</h3>
+  <p>網站中之影片劇照、預告片與活動海報，著作權分屬各影片導演、製作團隊及影像宜蘭計畫，僅於本網站中作為活動介紹使用。</p>
+  <h3>三、分享與引用</h3>
+  <p>歡迎分享本網站連結宣傳活動。如需引用文字或圖片，請註明出處並事先聯繫：<b><a href="mailto:iris27work@gmail.com">iris27work@gmail.com</a></b></p>
+  <h3>四、外部連結</h3>
+  <p>本網站連結至 YouTube、Facebook 等外部網站，其內容與隱私權政策由各網站自行負責。</p>
+  <h3>五、活動資訊</h3>
+  <p>活動時間、地點與內容如有異動，以現場及最新公告為準。</p>
+</dialog>
 
 <script>
 /* ---------- 開場轉場 ---------- */
@@ -680,6 +789,16 @@ document.querySelectorAll('.reveal, .reveal-mask').forEach((el, i) => {
   else io.observe(el);
 });
 
+/* ---------- 隱私權／著作權視窗 ---------- */
+document.querySelectorAll('[data-open]').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  document.getElementById(a.dataset.open).showModal();
+}));
+document.querySelectorAll('dialog.legal').forEach(d => {
+  d.querySelector('.legal__close').addEventListener('click', () => d.close());
+  d.addEventListener('click', e => { if (e.target === d) d.close(); }); // 點背景關閉
+});
+
 /* ---------- 表單 ---------- */
 const form = document.getElementById('signupForm');
 const sourceOther = document.getElementById('sourceOther');
@@ -695,6 +814,7 @@ form.addEventListener('input', e => e.target.closest('.field')?.classList.remove
 function validate(){
   const rules = {
     name:   () => form.name.value.trim() !== '',
+    people: () => { const n = Number(form.people.value); return Number.isInteger(n) && n >= 1 && n <= 20; },
     source: () => !!form.querySelector('input[name=source]:checked'),
     email:  () => { const v = form.email.value.trim(); return v === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); },
     shoes:  () => form.shoes_ack.checked,
@@ -738,6 +858,7 @@ form.addEventListener('submit', async e => {
   const fd = new FormData(form);
   const data = {
     name: fd.get('name').trim(),
+    people: Number(fd.get('people')),
     referrer: (fd.get('referrer') || '').trim(),
     source: fd.get('source'),
     source_other: fd.get('source') === 'other' ? (fd.get('source_other') || '').trim() : '',
