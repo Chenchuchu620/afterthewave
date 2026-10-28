@@ -223,8 +223,16 @@
   /* 圖片：把 images/ 資料夾放在同一層，檔名對上即可 */
   .film__media img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:transform 1.6s var(--ease)}
   .reveal-mask.in img{transform:scale(1)}
-  .film__media:has(iframe){aspect-ratio:16/9}
-  .film__media iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  /* 劇照連到 YouTube 預告片 */
+  .film__play{position:absolute;inset:0;display:block}
+  .film__play::after{
+    content:"";position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:50%;
+    background:rgba(20,27,36,.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 6.5v11l9-5.5z' fill='%23f5d77a'/%3E%3C/svg%3E") center/34px no-repeat;
+    border:1px solid rgba(245,215,122,.6);backdrop-filter:blur(4px);
+    transition:transform .4s var(--ease),background-color .4s;
+  }
+  .film__play:hover::after,.film__play:focus-visible::after{transform:scale(1.12);background-color:rgba(20,27,36,.8)}
+  .film__play:hover img{transform:scale(1.05)}
   .film__media .ph{
     position:absolute;inset:0;display:grid;place-items:center;
     color:rgba(255,255,255,.35);font-size:.85rem;letter-spacing:.2em;
@@ -451,8 +459,9 @@
     <div class="films">
       <article class="film">
         <div class="film__media reveal-mask">
-          <iframe src="https://www.youtube.com/embed/WMh2no7UQoQ" title="山上有座廟廟裡有貴仁｜預告" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <img src="images/film-1.jpg" alt="山上有座廟廟裡有貴仁劇照" onerror="this.style.display='none'">
+          <a class="film__play" href="https://youtu.be/WMh2no7UQoQ" target="_blank" rel="noopener" aria-label="觀看《山上有座廟廟裡有貴仁》預告片">
+            <img src="貴仁.jpg" alt="山上有座廟廟裡有貴仁劇照">
+          </a>
         </div>
         <div class="film__text reveal reveal--right">
           <div class="film__no">01</div>
@@ -464,8 +473,9 @@
 
       <article class="film">
         <div class="film__media reveal-mask">
-          <iframe src="https://www.youtube.com/embed/zlEEo_l9Hwc" title="海海人生｜預告" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <img src="images/film-2.jpg" alt="海海人生劇照" onerror="this.style.display='none'">
+          <a class="film__play" href="https://youtu.be/zlEEo_l9Hwc" target="_blank" rel="noopener" aria-label="觀看《海海人生》預告片">
+            <img src="海海人生.jpg" alt="海海人生劇照">
+          </a>
         </div>
         <div class="film__text reveal reveal--left">
           <div class="film__no">02</div>
@@ -477,8 +487,9 @@
 
       <article class="film">
         <div class="film__media reveal-mask">
-          <iframe src="https://www.youtube.com/embed/V2tWL-0lBUo" title="大坑罟的月光騎士｜預告" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <img src="images/film-3.jpg" alt="大坑罟的月光騎士劇照" onerror="this.style.display='none'">
+          <a class="film__play" href="https://youtu.be/V2tWL-0lBUo" target="_blank" rel="noopener" aria-label="觀看《大坑罟的月光騎士》預告片">
+            <img src="月光騎士.jpg" alt="大坑罟的月光騎士劇照">
+          </a>
         </div>
         <div class="film__text reveal reveal--right">
           <div class="film__no">03</div>
