@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>浪潮之後・與海有約｜大坑罟社區發展協會</title>
+<meta name="description" content="2026/11/14（六）大坑罟影展與夜觀陸蟹體驗。宜蘭縣蘇澳鎮大成路58號。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     色彩與基本設定（要改色調只要改這裡）
+     ========================================================= */
+  :root{
+    --night-900:#141b24;
+    --night-800:#1c2531;
+    --night-700:#26313f;
+    --night-600:#35424f;
+    --sea:#3f5568;
+    --moon:#f5d77a;
+    --moon-glow:rgba(245,215,122,.35);
+    --sand:#c9a27a;
+    --moss:#2f3d33;
+    --text:#f3f1ec;
+    --text-dim:#b9bfc6;
+    --line:rgba(255,255,255,.14);
+    --radius:22px;
+    --ease:cubic-bezier(.22,.8,.24,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--night-900);
+    color:var(--text);
+    font-family:"Noto Sans TC",system-ui,sans-serif;
+    line-height:1.8;
+    overflow-x:hidden;
+  }
+  body.is-loading{overflow:hidden}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .serif{font-family:"Noto Serif TC",serif}
+
+  /* =========================================================
+     開場轉場：月亮升起 → 幕布向上收
+     ========================================================= */
+  .intro{
+    position:fixed;inset:0;z-index:100;
+    background:var(--night-900);
+    display:grid;place-items:center;
+    transition:clip-path 1.4s var(--ease);
+    clip-path:inset(0 0 0 0);
+  }
+  .intro.done{clip-path:inset(0 0 100% 0)}
+  .intro__moon{
+    width:90px;height:90px;border-radius:50%;
+    background:radial-gradient(circle at 40% 38%,#fff6cf,var(--moon) 60%,#d9b85a);
+    box-shadow:0 0 60px 20px var(--moon-glow);
+    animation:moonRise 1.6s var(--ease) both;
+  }
+  .intro__text{
+    position:absolute;bottom:22%;
+    letter-spacing:.6em;font-size:.95rem;color:var(--text-dim);
+    animation:fadeUp 1s .6s var(--ease) both;
+  }
+  @keyframes moonRise{from{transform:translateY(80px) scale(.6);opacity:0}to{transform:none;opacity:1}}
+  @keyframes fadeUp{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
+
+  /* =========================================================
+     導覽列
+     ========================================================= */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:18px clamp(16px,4vw,48px);
+    transition:background .4s,backdrop-filter .4s,padding .4s;
+  }
+  .nav.scrolled{
+    background:rgba(20,27,36,.75);
+    backdrop-filter:blur(12px);
+    padding-top:12px;padding-bottom:12px;
+    border-bottom:1px solid var(--line);
+  }
+  .nav__logo{font-weight:900;letter-spacing:.15em;text-decoration:none}
+  .nav__links{display:flex;gap:28px;list-style:none}
+  .nav__links a{
+    text-decoration:none;font-size:.92rem;color:var(--text-dim);
+    position:relative;transition:color .3s;
+  }
+  .nav__links a::after{
+    content:"";position:absolute;left:0;bottom:-4px;height:1px;width:100%;
+    background:var(--moon);transform:scaleX(0);transform-origin:right;
+    transition:transform .4s var(--ease);
+  }
+  .nav__links a:hover,.nav__links a.active{color:var(--text)}
+  .nav__links a:hover::after,.nav__links a.active::after{transform:scaleX(1);transform-origin:left}
+  .nav__cta{
+    text-decoration:none;font-size:.9rem;padding:8px 18px;border-radius:999px;
+    background:var(--moon);color:var(--night-900);font-weight:700;
+    transition:transform .3s,box-shadow .3s;
+  }
+  .nav__cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px var(--moon-glow)}
+  @media (max-width:720px){.nav__links{display:none}}
+
+  /* =========================================================
+     首頁 Hero
+     ========================================================= */
+  .hero{
+    position:relative;min-height:100svh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:120px clamp(16px,6vw,96px) 160px;
+    overflow:hidden;
+    /* 換成海報背景圖：background-image:url(images/hero-bg.jpg) */
+    background:
+      radial-gradient(ellipse 60% 40% at 72% 28%,rgba(245,215,122,.18),transparent 70%),
+      linear-gradient(180deg,#232c38 0%,#1e2833 45%,#1a2531 60%,#141b24 100%);
+  }
+  .hero__moon{
+    position:absolute;top:20%;right:16%;
+    width:clamp(60px,9vw,120px);aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle at 40% 38%,#fff6cf,var(--moon) 60%,#d9b85a);
+    box-shadow:0 0 80px 30px var(--moon-glow),0 0 200px 80px rgba(245,215,122,.12);
+    will-change:transform;
+  }
+  .hero__moonpath{
+    position:absolute;right:calc(16% - 40px);top:58%;width:clamp(120px,16vw,220px);height:40%;
+    background:repeating-linear-gradient(180deg,rgba(245,215,122,.35) 0 3px,transparent 3px 14px);
+    filter:blur(2px);opacity:.6;
+    -webkit-mask:linear-gradient(180deg,#000,transparent);mask:linear-gradient(180deg,#000,transparent);
+    animation:shimmer 4s ease-in-out infinite;
+  }
+  @keyframes shimmer{50%{opacity:.3;transform:scaleX(1.15)}}
+
+  .hero__date{
+    display:inline-flex;align-items:baseline;gap:12px;
+    font-size:.95rem;letter-spacing:.3em;color:var(--sand);margin-bottom:18px;
+  }
+  .hero__title{
+    font-family:"Noto Serif TC",serif;font-weight:900;
+    font-size:clamp(3rem,10vw,7.5rem);line-height:1.15;letter-spacing:.12em;
+  }
+  .hero__title .line{display:block;overflow:hidden}
+  .hero__title .line span{display:inline-block;transform:translateY(110%)}
+  .hero__title .line:nth-child(2){padding-left:clamp(1em,12vw,3em)}
+  body.ready .hero__title .line span{animation:lineUp 1.2s var(--ease) forwards}
+  body.ready .hero__title .line:nth-child(2) span{animation-delay:.18s}
+  @keyframes lineUp{to{transform:none}}
+
+  .hero__sub{
+    margin-top:28px;max-width:34em;color:var(--text-dim);
+    opacity:0;transform:translateY(20px);
+  }
+  body.ready .hero__sub{animation:fadeUp 1s .7s var(--ease) forwards}
+  .hero__actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px;opacity:0}
+  body.ready .hero__actions{animation:fadeUp 1s .9s var(--ease) forwards}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 28px;border-radius:999px;border:1px solid var(--line);
+    font:inherit;font-weight:500;text-decoration:none;cursor:pointer;
+    color:var(--text);background:transparent;
+    transition:all .35s var(--ease);
+  }
+  .btn:hover{border-color:var(--moon);color:var(--moon)}
+  .btn--moon{background:var(--moon);color:var(--night-900);border-color:var(--moon);font-weight:700}
+  .btn--moon:hover{color:var(--night-900);box-shadow:0 10px 30px var(--moon-glow);transform:translateY(-2px)}
+
+  /* 海浪 */
+  .waves{position:absolute;left:0;right:0;bottom:0;height:140px;pointer-events:none}
+  .waves svg{position:absolute;bottom:0;width:200%;height:100%}
+  .wave1{fill:rgba(63,85,104,.35);animation:waveMove 14s linear infinite}
+  .wave2{fill:rgba(38,49,63,.7);animation:waveMove 9s linear infinite reverse}
+  .wave3{fill:var(--night-900);animation:waveMove 20s linear infinite}
+  @keyframes waveMove{to{transform:translateX(-50%)}}
+
+  .scroll-hint{
+    position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;
+    font-size:.75rem;letter-spacing:.4em;color:var(--text-dim);
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+  }
+  .scroll-hint::after{
+    content:"";width:1px;height:40px;background:linear-gradient(var(--moon),transparent);
+    animation:drip 2s ease-in-out infinite;
+  }
+  @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  /* =========================================================
+     區塊通用
+     ========================================================= */
+  section{position:relative}
+  .section{padding:clamp(80px,12vw,140px) clamp(16px,6vw,96px)}
+  .section__head{margin-bottom:56px}
+  .eyebrow{font-size:.8rem;letter-spacing:.4em;color:var(--sand);text-transform:uppercase}
+  .section__title{
+    font-family:"Noto Serif TC",serif;font-weight:900;
+    font-size:clamp(2rem,5vw,3.2rem);letter-spacing:.1em;margin-top:8px;
+  }
+
+  /* 捲動進場動畫 */
+  .reveal{opacity:0;transform:translateY(50px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal--left{transform:translateX(-60px)}
+  .reveal--right{transform:translateX(60px)}
+  .reveal--left.in,.reveal--right.in{transform:none}
+  .reveal-mask{clip-path:inset(0 100% 0 0);transition:clip-path 1.3s var(--ease)}
+  .reveal-mask.in{clip-path:inset(0 0 0 0)}
+
+  /* =========================================================
+     影片介紹
+     ========================================================= */
+  .films{display:flex;flex-direction:column;gap:clamp(70px,10vw,120px)}
+  .film{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center;
+  }
+  .film:nth-child(even){grid-template-columns:1fr 1.1fr}
+  .film:nth-child(even) .film__media{order:2}
+  .film__media{
+    position:relative;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;
+    background:var(--night-700) center/cover no-repeat;
+    box-shadow:0 30px 60px rgba(0,0,0,.4);
+  }
+  /* 圖片：把 images/ 資料夾放在同一層，檔名對上即可 */
+  .film__media img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:transform 1.6s var(--ease)}
+  .reveal-mask.in img{transform:scale(1)}
+  .film__media:has(iframe){aspect-ratio:16/9}
+  .film__media iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .film__media .ph{
+    position:absolute;inset:0;display:grid;place-items:center;
+    color:rgba(255,255,255,.35);font-size:.85rem;letter-spacing:.2em;
+  }
+  .film__no{font-family:"Noto Serif TC",serif;font-size:4rem;line-height:1;color:transparent;-webkit-text-stroke:1px var(--sand);opacity:.7}
+  .film__title{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:.08em;margin:10px 0 6px}
+  .film__tag{color:var(--moon);letter-spacing:.2em;font-size:.95rem;margin-bottom:18px}
+  .film__desc{color:var(--text-dim)}
+  .film__link{margin-top:18px;color:var(--text-dim)}
+  .film__link a{color:var(--moon);text-decoration:none;border-bottom:1px dashed var(--sand);word-break:break-all}
+  .film__link a:hover{border-bottom-style:solid}
+  #intro-yilan{padding-bottom:0}
+  .film__note{
+    display:inline-flex;align-items:center;gap:8px;margin-top:18px;
+    padding:6px 14px;border-radius:999px;font-size:.85rem;
+    background:rgba(201,162,122,.18);color:var(--sand);
+  }
+  @media (max-width:820px){
+    .film,.film:nth-child(even){grid-template-columns:1fr}
+    .film:nth-child(even) .film__media{order:0}
+  }
+
+  /* =========================================================
+     時程
+     ========================================================= */
+  .schedule{background:linear-gradient(180deg,var(--night-900),var(--night-800) 30%,var(--night-800) 70%,var(--night-900))}
+  .timeline{position:relative;max-width:820px;margin:0 auto;list-style:none}
+  .timeline::before{
+    content:"";position:absolute;left:150px;top:10px;bottom:10px;width:1px;background:var(--line);
+  }
+  .timeline__progress{
+    position:absolute;left:150px;top:10px;width:1px;height:0;
+    background:linear-gradient(var(--moon),var(--sand));box-shadow:0 0 12px var(--moon-glow);
+  }
+  .tl-item{display:grid;grid-template-columns:130px 40px 1fr;align-items:start;padding:22px 0}
+  .tl-time{font-family:"Noto Serif TC",serif;font-weight:700;font-size:1.5rem;text-align:right;line-height:1.3}
+  .tl-time small{display:block;font-family:"Noto Sans TC";font-size:.85rem;color:var(--sand);letter-spacing:.3em;font-weight:500}
+  .tl-dot{
+    justify-self:center;margin-top:8px;width:16px;height:16px;border-radius:50%;
+    border:2px solid var(--text-dim);background:var(--night-800);position:relative;z-index:1;
+    transition:all .5s var(--ease);
+  }
+  .tl-item.in .tl-dot{border-color:var(--moon);background:var(--moon);box-shadow:0 0 0 6px rgba(245,215,122,.15),0 0 20px var(--moon-glow)}
+  .tl-body{padding-left:14px}
+  .tl-body h3{font-size:1.15rem;font-weight:700;margin-bottom:4px}
+  .tl-body p{color:var(--text-dim);font-size:.95rem}
+  .pill{display:inline-block;margin-top:8px;padding:3px 12px;border-radius:999px;font-size:.82rem;background:rgba(201,162,122,.2);color:var(--sand)}
+  @media (max-width:600px){
+    .timeline::before,.timeline__progress{left:20px}
+    .tl-item{grid-template-columns:40px 1fr;grid-template-rows:auto auto}
+    .tl-dot{grid-row:1/3;grid-column:1}
+    .tl-time{grid-column:2;text-align:left;padding-left:14px;font-size:1.25rem}
+    .tl-time small{display:inline;margin-left:8px}
+    .tl-body{grid-column:2}
+  }
+
+  .info-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:980px;margin:72px auto 0}
+  .info-card{
+    padding:26px;border-radius:var(--radius);border:1px solid var(--line);
+    background:rgba(255,255,255,.03);transition:transform .4s var(--ease),border-color .4s;
+  }
+  .info-card:hover{transform:translateY(-6px);border-color:rgba(245,215,122,.4)}
+  .info-card span{font-size:.8rem;letter-spacing:.3em;color:var(--sand)}
+  .info-card p{font-size:1.1rem;font-weight:500;margin-top:6px}
+  .info-card a{text-decoration:none;border-bottom:1px dashed var(--sand)}
+
+  /* =========================================================
+     報名表單
+     ========================================================= */
+  .signup{
+    background:
+      radial-gradient(ellipse 50% 40% at 85% 10%,rgba(245,215,122,.1),transparent 70%),
+      linear-gradient(180deg,var(--night-900),var(--moss) 160%);
+  }
+  .form-wrap{
+    max-width:720px;margin:0 auto;padding:clamp(28px,5vw,52px);
+    border-radius:28px;border:1px solid var(--line);
+    background:rgba(20,27,36,.6);backdrop-filter:blur(10px);
+    box-shadow:0 40px 80px rgba(0,0,0,.35);
+  }
+  .field{margin-bottom:26px}
+  .field label,.field legend{display:block;font-weight:500;margin-bottom:10px}
+  .req{color:var(--moon);margin-left:4px}
+  .field input[type=text],.field input[type=tel],.field input[type=email],.field select{
+    width:100%;padding:14px 18px;border-radius:14px;
+    border:1px solid var(--line);background:rgba(255,255,255,.04);
+    color:var(--text);font:inherit;outline:none;
+    transition:border-color .3s,background .3s,box-shadow .3s;
+  }
+  .field select{appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a27a' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 18px center}
+  .field select option{background:var(--night-800)}
+  .field input:focus,.field select:focus{border-color:var(--moon);background:rgba(255,255,255,.07);box-shadow:0 0 0 4px rgba(245,215,122,.12)}
+  .field input::placeholder{color:rgba(255,255,255,.3)}
+  fieldset.field{border:none}
+
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip input{position:absolute;opacity:0;pointer-events:none}
+  .chip span{
+    display:inline-block;padding:9px 18px;border-radius:999px;cursor:pointer;
+    border:1px solid var(--line);color:var(--text-dim);font-size:.93rem;
+    transition:all .3s var(--ease);user-select:none;
+  }
+  .chip span:hover{border-color:var(--sand);color:var(--text)}
+  .chip input:checked+span{background:var(--moon);border-color:var(--moon);color:var(--night-900);font-weight:700}
+  .chip input:focus-visible+span{outline:2px solid var(--moon);outline-offset:2px}
+  .other-input{margin-top:12px;display:none}
+  .other-input.show{display:block;animation:fadeUp .5s var(--ease)}
+
+  .check{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+  .check input{position:absolute;opacity:0}
+  .check .box{
+    flex:0 0 22px;height:22px;border-radius:7px;border:1.5px solid var(--text-dim);
+    display:grid;place-items:center;margin-top:3px;transition:all .3s var(--ease);
+  }
+  .check .box svg{width:13px;stroke:var(--night-900);stroke-dasharray:20;stroke-dashoffset:20;transition:stroke-dashoffset .35s .1s}
+  .check input:checked~.box{background:var(--moon);border-color:var(--moon)}
+  .check input:checked~.box svg{stroke-dashoffset:0}
+  .check input:focus-visible~.box{outline:2px solid var(--moon);outline-offset:2px}
+  .field.error input,.field.error select{border-color:#e48a7a}
+  .field.error .check .box{border-color:#e48a7a}
+  .hint{color:var(--text-dim);font-size:.85rem;font-weight:400;margin-left:6px}
+  .err-msg{color:#f0a294;font-size:.85rem;margin-top:8px;display:none}
+  .field.error .err-msg{display:block}
+  .field.error{animation:shake .4s}
+  @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+  .submit{width:100%;justify-content:center;padding:17px;font-size:1.05rem;margin-top:10px;position:relative;overflow:hidden}
+  .submit.loading{pointer-events:none;color:transparent}
+  .submit.loading::after{
+    content:"";position:absolute;width:22px;height:22px;border-radius:50%;
+    border:2px solid var(--night-900);border-right-color:transparent;animation:spin .8s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .success{display:none;text-align:center;padding:30px 0}
+  .success.show{display:block;animation:fadeUp .8s var(--ease)}
+  .success__moon{width:70px;height:70px;margin:0 auto 24px;border-radius:50%;
+    background:radial-gradient(circle at 40% 38%,#fff6cf,var(--moon) 60%,#d9b85a);box-shadow:0 0 50px 14px var(--moon-glow)}
+  .success h3{font-family:"Noto Serif TC",serif;font-size:1.8rem;letter-spacing:.1em;margin-bottom:10px}
+  .success p{color:var(--text-dim)}
+
+  /* =========================================================
+     頁尾
+     ========================================================= */
+  footer{padding:60px clamp(16px,6vw,96px);border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;color:var(--text-dim);font-size:.9rem}
+  footer strong{color:var(--text);font-size:1.05rem}
+
+  /* 減少動態偏好 */
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .reveal,.reveal-mask{opacity:1;transform:none;clip-path:none}
+    .hero__title .line span{transform:none}
+    .hero__sub,.hero__actions{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body class="is-loading">
+
+<!-- 開場轉場 -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro__moon"></div>
+  <p class="intro__text">浪潮之後</p>
+</div>
+
+<!-- 導覽列 -->
+<nav class="nav" id="nav">
+  <a href="#home" class="nav__logo serif">與海有約</a>
+  <ul class="nav__links">
+    <li><a href="#about">影片介紹</a></li>
+    <li><a href="#schedule">時程安排</a></li>
+    <li><a href="#signup">報名</a></li>
+  </ul>
+  <a href="#signup" class="nav__cta">立即報名</a>
+</nav>
+
+<main>
+  <!-- ================= 首頁 ================= -->
+  <section class="hero" id="home">
+    <div class="hero__moon" id="heroMoon"></div>
+    <div class="hero__moonpath"></div>
+
+    <p class="hero__date">2026.11.14 <span>（六）</span></p>
+    <h1 class="hero__title">
+      <span class="line"><span>浪潮之後</span></span>
+      <span class="line"><span>與海有約</span></span>
+    </h1>
+    <p class="hero__sub">三部關於大坑罟的影像故事，一場映後座談，還有月光下的陸蟹夜觀。<br>16:00 報到・19:00 賦歸・備有小食</p>
+    <div class="hero__actions">
+      <a href="#signup" class="btn btn--moon">我要報名 →</a>
+      <a href="#schedule" class="btn">看活動時程</a>
+    </div>
+
+    <div class="waves">
+      <svg viewBox="0 0 2880 140" preserveAspectRatio="none"><path class="wave1" d="M0 70 Q 360 20 720 70 T 1440 70 T 2160 70 T 2880 70 V140 H0Z"/></svg>
+      <svg viewBox="0 0 2880 140" preserveAspectRatio="none"><path class="wave2" d="M0 90 Q 360 50 720 90 T 1440 90 T 2160 90 T 2880 90 V140 H0Z"/></svg>
+      <svg viewBox="0 0 2880 140" preserveAspectRatio="none"><path class="wave3" d="M0 110 Q 360 85 720 110 T 1440 110 T 2160 110 T 2880 110 V140 H0Z"/></svg>
+    </div>
+    <div class="scroll-hint">SCROLL</div>
+  </section>
+
+  <!-- ================= 介紹 ================= -->
+  <section class="section" id="intro-yilan">
+    <article class="film">
+      <div class="film__media reveal-mask">
+        <img src="公播.jpg" alt="影像宜蘭">
+      </div>
+      <div class="film__text reveal reveal--right">
+        <p class="eyebrow">Screening</p>
+        <h2 class="section__title">影像宜蘭</h2>
+        <p class="film__link">更多公播場次 → <a href="https://www.facebook.com/projectyilan" target="_blank" rel="noopener">facebook.com/projectyilan</a></p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= 影片介紹 ================= -->
+  <section class="section" id="about">
+    <div class="section__head reveal">
+      <p class="eyebrow">Films</p>
+      <h2 class="section__title">影片介紹</h2>
+    </div>
+
+    <div class="films">
+      <article class="film">
+        <div class="film__media reveal-mask">
+          <iframe src="https://www.youtube.com/embed/WMh2no7UQoQ" title="山上有座廟廟裡有貴仁｜預告" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <img src="images/film-1.jpg" alt="山上有座廟廟裡有貴仁劇照" onerror="this.style.display='none'">
+        </div>
+        <div class="film__text reveal reveal--right">
+          <div class="film__no">01</div>
+          <h3 class="film__title">山上有座廟<br>廟裡有貴仁</h3>
+          <p class="film__tag">六旬女兒追憶討海父親與田都元帥</p>
+          <p class="film__desc">（在這裡填寫影片簡介、導演、片長等資訊。）</p>
+        </div>
+      </article>
+
+      <article class="film">
+        <div class="film__media reveal-mask">
+          <iframe src="https://www.youtube.com/embed/zlEEo_l9Hwc" title="海海人生｜預告" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <img src="images/film-2.jpg" alt="海海人生劇照" onerror="this.style.display='none'">
+        </div>
+        <div class="film__text reveal reveal--left">
+          <div class="film__no">02</div>
+          <h3 class="film__title">海海人生</h3>
+          <p class="film__tag">網起的不只是漁獲，探問這片海的未來</p>
+          <p class="film__desc">（在這裡填寫影片簡介、導演、片長等資訊。）</p>
+        </div>
+      </article>
+
+      <article class="film">
+        <div class="film__media reveal-mask">
+          <iframe src="https://www.youtube.com/embed/V2tWL-0lBUo" title="大坑罟的月光騎士｜預告" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <img src="images/film-3.jpg" alt="大坑罟的月光騎士劇照" onerror="this.style.display='none'">
+        </div>
+        <div class="film__text reveal reveal--right">
+          <div class="film__no">03</div>
+          <h3 class="film__title">大坑罟的月光騎士</h3>
+          <p class="film__tag">夜探陸蟹體驗</p>
+          <p class="film__desc">（在這裡填寫影片簡介、導演、片長等資訊。）</p>
+          <span class="film__note">👟 請穿布鞋、長褲，有頭燈請攜帶</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= 時程安排 ================= -->
+  <section class="section schedule" id="schedule">
+    <div class="section__head reveal" style="text-align:center">
+      <p class="eyebrow">Schedule</p>
+      <h2 class="section__title">時程安排</h2>
+    </div>
+
+    <ol class="timeline" id="timeline">
+      <div class="timeline__progress" id="tlProgress"></div>
+      <li class="tl-item reveal">
+        <div class="tl-time">16:00<small>報到</small></div><div class="tl-dot"></div>
+        <div class="tl-body"><h3>報到入場</h3><p>領取活動資料，入座準備</p></div>
+      </li>
+      <li class="tl-item reveal">
+        <div class="tl-time">16:10<small>開場</small></div><div class="tl-dot"></div>
+        <div class="tl-body"><h3>引言・影展介紹</h3></div>
+      </li>
+      <li class="tl-item reveal">
+        <div class="tl-time">16:30<small>放映</small></div><div class="tl-dot"></div>
+        <div class="tl-body"><h3>影片放映</h3><p>山上有座廟廟裡有貴仁／海海人生／大坑罟的月光騎士</p></div>
+      </li>
+      <li class="tl-item reveal">
+        <div class="tl-time">17:00<small>座談</small></div><div class="tl-dot"></div>
+        <div class="tl-body"><h3>映後座談會</h3><span class="pill">備有餐點小食</span></div>
+      </li>
+      <li class="tl-item reveal">
+        <div class="tl-time">18:00<small>觀蟹</small></div><div class="tl-dot"></div>
+        <div class="tl-body"><h3>專業團隊・夜觀導覽</h3><span class="pill">請穿布鞋、長褲，有頭燈請攜帶</span></div>
+      </li>
+      <li class="tl-item reveal">
+        <div class="tl-time">19:00<small>賦歸</small></div><div class="tl-dot"></div>
+        <div class="tl-body"><h3>活動結束</h3><p>帶著月光與海的故事回家</p></div>
+      </li>
+    </ol>
+
+    <div class="info-cards">
+      <div class="info-card reveal"><span>日期</span><p>2026 年 11 月 14 日（六）</p></div>
+      <div class="info-card reveal"><span>地點</span><p><a href="https://maps.google.com/?q=宜蘭縣蘇澳鎮大成路58號" target="_blank" rel="noopener">宜蘭縣蘇澳鎮大成路58號</a></p></div>
+      <div class="info-card reveal"><span>主辦</span><p>大坑罟社區發展協會</p></div>
+    </div>
+  </section>
+
+  <!-- ================= 報名 ================= -->
+  <section class="section signup" id="signup">
+    <div class="section__head reveal" style="text-align:center">
+      <p class="eyebrow">Register</p>
+      <h2 class="section__title">活動報名</h2>
+    </div>
+
+    <div class="form-wrap reveal">
+      <!--
+        後台串接：
+        - 表單 id="signupForm"，送出時 JS 會組成 JSON（見最下方 submitToServer）
+        - 每個欄位的 name 就是送到後台的 key
+      -->
+      <form id="signupForm" novalidate>
+        <div class="field" data-field="name">
+          <label for="name">姓名<span class="req">*</span></label>
+          <input type="text" id="name" name="name" placeholder="請輸入您的姓名" autocomplete="name">
+          <p class="err-msg">請填寫姓名</p>
+        </div>
+
+        <div class="field" data-field="referrer">
+          <label for="referrer">介紹人</label>
+          <input type="text" id="referrer" name="referrer" placeholder="是誰邀請您來的？（沒有可留空）">
+        </div>
+
+        <fieldset class="field" data-field="source">
+          <legend>從哪裡得知這個活動？<span class="req">*</span></legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="source" value="facebook"><span>Facebook</span></label>
+            <label class="chip"><input type="radio" name="source" value="instagram"><span>Instagram</span></label>
+            <label class="chip"><input type="radio" name="source" value="line"><span>LINE 群組</span></label>
+            <label class="chip"><input type="radio" name="source" value="friend"><span>親友介紹</span></label>
+            <label class="chip"><input type="radio" name="source" value="poster"><span>海報傳單</span></label>
+            <label class="chip"><input type="radio" name="source" value="other"><span>其他</span></label>
+          </div>
+          <input type="text" class="other-input" id="sourceOther" name="source_other" placeholder="請說明">
+          <p class="err-msg">請選擇一個選項</p>
+        </fieldset>
+
+        <div class="field" data-field="email">
+          <label for="email">有需要用 email 提醒你嗎？<span class="hint">（選填）</span></label>
+          <input type="email" id="email" name="email" placeholder="需要提醒的話，請留下 email" autocomplete="email">
+          <p class="err-msg">email 格式好像不太對</p>
+        </div>
+
+        <div class="field" data-field="shoes">
+          <label class="check">
+            <input type="checkbox" name="shoes_ack" id="shoes" value="1">
+            <span class="box"><svg viewBox="0 0 14 10" fill="none" stroke-width="2.2"><path d="M1 5l4 4 8-8"/></svg></span>
+            <span>我會穿布鞋、長褲，有頭燈會記得帶頭燈<span class="req">*</span></span>
+          </label>
+          <p class="err-msg">請勾選</p>
+        </div>
+
+        <div class="field" data-field="photo">
+          <label class="check">
+            <input type="checkbox" name="photo_consent" id="photo" value="1">
+            <span class="box"><svg viewBox="0 0 14 10" fill="none" stroke-width="2.2"><path d="M1 5l4 4 8-8"/></svg></span>
+            <span>我同意現場拍攝<span class="req">*</span></span>
+          </label>
+          <p class="err-msg">請勾選</p>
+        </div>
+
+        <button type="submit" class="btn btn--moon submit" id="submitBtn">送出報名</button>
+      </form>
+
+      <div class="success" id="success">
+        <div class="success__moon"></div>
+        <h3>報名成功</h3>
+        <p>11 月 14 日下午四點，我們在大坑罟等你。<br>記得穿布鞋、長褲，有頭燈就帶上 🔦</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div><strong>大坑罟社區發展協會</strong><br>宜蘭縣蘇澳鎮大成路58號</div>
+  <div>浪潮之後・與海有約　2026.11.14</div>
+</footer>
+
+<script>
+/* ---------- 開場轉場 ---------- */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('intro').classList.add('done');
+    document.body.classList.remove('is-loading');
+    document.body.classList.add('ready');
+  }, 1500);
+});
+
+/* ---------- 導覽列 ---------- */
+const nav = document.getElementById('nav');
+const navLinks = document.querySelectorAll('.nav__links a');
+const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href')));
+
+/* ---------- 捲動視差 + 時間軸進度 ---------- */
+const moon = document.getElementById('heroMoon');
+const timeline = document.getElementById('timeline');
+const tlProgress = document.getElementById('tlProgress');
+
+function onScroll(){
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 40);
+  if (y < window.innerHeight) moon.style.transform = `translateY(${y * 0.35}px)`;
+
+  // 時間軸亮線跟著捲動長出來
+  const r = timeline.getBoundingClientRect();
+  const p = Math.min(Math.max((window.innerHeight * 0.6 - r.top) / r.height, 0), 1);
+  tlProgress.style.height = (p * (r.height - 20)) + 'px';
+
+  // 目前所在區塊
+  let current = null;
+  sections.forEach((s, i) => { if (s.getBoundingClientRect().top < window.innerHeight * 0.4) current = i; });
+  navLinks.forEach((a, i) => a.classList.toggle('active', i === current));
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+/* ---------- 進場動畫 ---------- */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal, .reveal-mask').forEach((el, i) => {
+  // 同一組的卡片錯開出現
+  if (el.classList.contains('info-card')) el.style.transitionDelay = (i % 3) * 0.12 + 's';
+  io.observe(el);
+});
+
+/* ---------- 表單 ---------- */
+const form = document.getElementById('signupForm');
+const sourceOther = document.getElementById('sourceOther');
+
+form.querySelectorAll('input[name=source]').forEach(r =>
+  r.addEventListener('change', () => {
+    sourceOther.classList.toggle('show', r.value === 'other' && r.checked);
+    if (r.value === 'other') sourceOther.focus();
+  })
+);
+form.addEventListener('input', e => e.target.closest('.field')?.classList.remove('error'));
+
+function validate(){
+  const rules = {
+    name:   () => form.name.value.trim() !== '',
+    source: () => !!form.querySelector('input[name=source]:checked'),
+    email:  () => { const v = form.email.value.trim(); return v === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); },
+    shoes:  () => form.shoes_ack.checked,
+    photo:  () => form.photo_consent.checked,
+  };
+  let firstBad = null;
+  for (const [key, ok] of Object.entries(rules)) {
+    const field = form.querySelector(`[data-field="${key}"]`);
+    const pass = ok();
+    field.classList.toggle('error', !pass);
+    if (!pass) {
+      // 重新觸發抖動動畫
+      field.style.animation = 'none'; field.offsetHeight; field.style.animation = '';
+      firstBad ??= field;
+    }
+  }
+  if (firstBad) firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  return !firstBad;
+}
+
+/* 👉 後台串接：把這裡改成你的 API 網址 */
+async function submitToServer(data){
+  // 範例：
+  // const res = await fetch('/api/signup', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify(data)
+  // });
+  // if (!res.ok) throw new Error('報名失敗');
+  // return res.json();
+  console.log('送出資料：', data);
+  return new Promise(r => setTimeout(r, 900)); // 假裝送出，接好後台後刪掉
+}
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!validate()) return;
+
+  const fd = new FormData(form);
+  const data = {
+    name: fd.get('name').trim(),
+    referrer: (fd.get('referrer') || '').trim(),
+    source: fd.get('source'),
+    source_other: fd.get('source') === 'other' ? (fd.get('source_other') || '').trim() : '',
+    email: (fd.get('email') || '').trim(),
+    email_reminder: (fd.get('email') || '').trim() !== '',
+    shoes_ack: true,
+    photo_consent: true,
+    submitted_at: new Date().toISOString(),
+  };
+
+  const btn = document.getElementById('submitBtn');
+  btn.classList.add('loading');
+  try {
+    await submitToServer(data);
+    form.style.display = 'none';
+    document.getElementById('success').classList.add('show');
+  } catch (err) {
+    alert('送出失敗，請稍後再試');
+  } finally {
+    btn.classList.remove('loading');
+  }
+});
+</script>
+</body>
+</html>
