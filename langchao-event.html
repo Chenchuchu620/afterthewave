@@ -463,7 +463,7 @@
       <span class="line"><span>浪潮之後</span></span>
       <span class="line"><span>與海有約</span></span>
     </h1>
-    <p class="hero__sub">三部關於大坑罟的影像故事，一場映後座談，還有月光下的陸蟹夜觀。<br>16:00 報到・19:00 賦歸・備有小食</p>
+    <p class="hero__sub">三個和海有關的影像故事，一場映後座談，還有月光下的陸蟹夜觀。<br>16:00 報到・19:00 賦歸・備有小食</p>
     <div class="hero__actions">
       <a href="#signup" class="btn btn--moon">我要報名 →</a>
       <a href="#schedule" class="btn">看活動時程</a>
@@ -487,7 +487,7 @@
         <p class="eyebrow">Screening</p>
         <h2 class="section__title">影像宜蘭</h2>
         <p class="film__desc" style="margin-top:18px">一個用影像連結生命、生活與地方，並將所發現的故事用影像表達出來的學習平台。<br>這裡提供「紀錄片完整製作」的學習課程。<br>只要你想學習用影像說故事，歡迎你/妳加入影像宜蘭行列～</p>
-        <p class="film__link">更多公播場次 → <a href="https://www.facebook.com/projectyilan" target="_blank" rel="noopener">facebook.com/projectyilan</a></p>
+        <p class="film__link">更多公播場次 → <a href="https://www.facebook.com/projectyilan" target="_blank" rel="noopener">Facebook</a></p>
       </div>
     </article>
   </section>
@@ -541,7 +541,8 @@
           <h3 class="film__title">大坑罟的月光騎士</h3>
           <p class="film__tag">夜探陸蟹體驗</p>
           <p class="film__meta"><span>導演</span>許惠萍．林振瑋<i></i><span>片長</span>17’</p>
-          <p class="film__desc">林振瑋剛從台北移居到蘇澳，對於在地的各種新鮮事物充滿好奇，許惠萍也是疫情期間回鄉後，開始發現故鄉的美好。</p>
+          <p class="film__desc">每逢農曆十六至十九，幾位「月光騎士」便戴上頭燈走上大坑罟沙灘，尋找當地稱作「紅管獅」的陸蟹。影片記錄夜訪陸蟹的身影，也聆聽人與家鄉的故事；一次次踏查，成為守護生態、延續對月光海深厚感情的約定。</p>
+          <p class="film__link">穿越台灣 → <a href="https://www.facebook.com/SavorTaiwan/" target="_blank" rel="noopener">Facebook</a></p>
           <span class="film__note">👟 請穿布鞋、長褲，有頭燈請攜帶</span>
         </div>
       </article>
@@ -570,7 +571,7 @@
         <div class="tl-body"><h3>影片放映</h3><p>山上有座廟廟裡有貴仁／海海人生／大坑罟的月光騎士</p></div>
       </li>
       <li class="tl-item reveal">
-        <div class="tl-time">17:00<small>座談</small></div><div class="tl-dot"></div>
+        <div class="tl-time">17:30<small>座談</small></div><div class="tl-dot"></div>
         <div class="tl-body"><h3>映後座談會</h3><span class="pill">備有餐點小食</span></div>
       </li>
       <li class="tl-item reveal">
@@ -641,7 +642,16 @@
           <p class="err-msg">email 格式好像不太對</p>
         </div>
 
-        <div class="field" data-field="shoes">
+        <fieldset class="field" data-field="attendance">
+          <legend>是否參加夜觀陸蟹？<span class="req">*</span></legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="attendance" value="viewing_only"><span>只觀影不參加夜觀陸蟹</span></label>
+            <label class="chip"><input type="radio" name="attendance" value="both"><span>兩者都會參加</span></label>
+          </div>
+          <p class="err-msg">請選擇是否參加夜觀陸蟹</p>
+        </fieldset>
+
+        <div class="field" data-field="shoes" hidden>
           <label class="check">
             <input type="checkbox" name="shoes_ack" id="shoes" value="1">
             <span class="box"><svg viewBox="0 0 14 10" fill="none" stroke-width="2.2"><path d="M1 5l4 4 8-8"/></svg></span>
@@ -666,7 +676,7 @@
       <div class="success" id="success">
         <div class="success__moon"></div>
         <h3>報名成功</h3>
-        <p>11 月 14 日下午四點，我們在大坑罟等你。<br>記得穿布鞋、長褲，有頭燈就帶上 🔦</p>
+        <p>11 月 14 日下午四點，我們在大坑罟等你。<br><span id="successShoesNote">記得穿布鞋、長褲，有頭燈就帶上 🔦</span></p>
       </div>
     </div>
   </section>
@@ -702,7 +712,7 @@
   <h3>二、蒐集目的</h3>
   <p>活動報名、人數統計與場地餐點準備、活動行前通知（僅限有留 email 者），以及活動成果紀錄。</p>
   <h3>三、蒐集的資料</h3>
-  <p>姓名、報名人數、介紹人、得知活動的管道、email（選填），以及您對穿著須知與現場拍攝的確認。</p>
+  <p>姓名、報名人數、介紹人、得知活動的管道、email（選填）、夜觀陸蟹參加方式，以及您對穿著須知與現場拍攝的確認。</p>
   <h3>四、利用期間、地區、對象與方式</h3>
   <ul>
     <li><b>期間：</b>自報名起至活動結束後 3 個月，期滿即刪除。</li>
@@ -802,6 +812,8 @@ document.querySelectorAll('dialog.legal').forEach(d => {
 /* ---------- 表單 ---------- */
 const form = document.getElementById('signupForm');
 const sourceOther = document.getElementById('sourceOther');
+const shoesField = form.querySelector('[data-field="shoes"]');
+const shoesCheckbox = form.elements.shoes_ack;
 
 form.querySelectorAll('input[name=source]').forEach(r =>
   r.addEventListener('change', () => {
@@ -809,15 +821,28 @@ form.querySelectorAll('input[name=source]').forEach(r =>
     if (r.value === 'other') sourceOther.focus();
   })
 );
+form.querySelectorAll('input[name=attendance]').forEach(r =>
+  r.addEventListener('change', () => {
+    const joiningNightWatch = r.value === 'both' && r.checked;
+    shoesField.hidden = !joiningNightWatch;
+    if (!joiningNightWatch) {
+      shoesCheckbox.checked = false;
+      shoesField.classList.remove('error');
+    }
+    r.closest('[data-field="attendance"]').classList.remove('error');
+  })
+);
 form.addEventListener('input', e => e.target.closest('.field')?.classList.remove('error'));
 
 function validate(){
+  const attendance = form.querySelector('input[name=attendance]:checked')?.value;
   const rules = {
     name:   () => form.name.value.trim() !== '',
     people: () => { const n = Number(form.people.value); return Number.isInteger(n) && n >= 1 && n <= 20; },
     source: () => !!form.querySelector('input[name=source]:checked'),
     email:  () => { const v = form.email.value.trim(); return v === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); },
-    shoes:  () => form.shoes_ack.checked,
+    attendance: () => !!attendance,
+    shoes:  () => attendance !== 'both' || shoesCheckbox.checked,
     photo:  () => form.photo_consent.checked,
   };
   let firstBad = null;
@@ -864,7 +889,8 @@ form.addEventListener('submit', async e => {
     source_other: fd.get('source') === 'other' ? (fd.get('source_other') || '').trim() : '',
     email: (fd.get('email') || '').trim(),
     email_reminder: (fd.get('email') || '').trim() !== '',
-    shoes_ack: true,
+    attendance: fd.get('attendance'),
+    shoes_ack: fd.get('attendance') === 'both' && shoesCheckbox.checked,
     photo_consent: true,
     submitted_at: new Date().toISOString(),
   };
@@ -873,6 +899,7 @@ form.addEventListener('submit', async e => {
   btn.classList.add('loading');
   try {
     await submitToServer(data);
+    document.getElementById('successShoesNote').hidden = data.attendance !== 'both';
     form.style.display = 'none';
     document.getElementById('success').classList.add('show');
   } catch (err) {
