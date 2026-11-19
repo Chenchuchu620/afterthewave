@@ -447,9 +447,9 @@
   <ul class="nav__links">
     <li><a href="#about">影片介紹</a></li>
     <li><a href="#schedule">時程安排</a></li>
-    <li><a href="#signup">報名</a></li>
+    <li><a href="#signup">明年見</a></li>
   </ul>
-  <a href="#signup" class="nav__cta">立即報名</a>
+  <a href="https://www.facebook.com/projectyilan" target="_blank" rel="noopener" class="nav__cta">追蹤影像宜蘭</a>
 </nav>
 
 <main>
@@ -465,7 +465,7 @@
     </h1>
     <p class="hero__sub">三個和海有關的影像故事，一場映後座談，還有月光下的陸蟹夜觀。<br>16:00 報到・19:00 賦歸・備有小食</p>
     <div class="hero__actions">
-      <a href="#signup" class="btn btn--moon">我要報名 →</a>
+      <a href="#signup" class="btn btn--moon">活動已結束・明年見 →</a>
       <a href="#schedule" class="btn">看活動時程</a>
     </div>
 
@@ -591,92 +591,19 @@
     </div>
   </section>
 
-  <!-- ================= 報名 ================= -->
+  <!-- ================= 報名（已截止） ================= -->
   <section class="section signup" id="signup">
     <div class="section__head reveal" style="text-align:center">
-      <p class="eyebrow">Register</p>
-      <h2 class="section__title">活動報名</h2>
+      <p class="eyebrow">See You Next Year</p>
+      <h2 class="section__title">報名已截止</h2>
     </div>
 
     <div class="form-wrap reveal">
-      <!--
-        後台串接：
-        - 表單 id="signupForm"，送出時 JS 會組成 JSON（見最下方 submitToServer）
-        - 每個欄位的 name 就是送到後台的 key
-      -->
-      <form id="signupForm" novalidate>
-        <div class="field" data-field="name">
-          <label for="name">姓名<span class="req">*</span></label>
-          <input type="text" id="name" name="name" placeholder="請輸入您的姓名" autocomplete="name">
-          <p class="err-msg">請填寫姓名</p>
-        </div>
-
-        <div class="field" data-field="people">
-          <label for="people">報名人數<span class="req">*</span><span class="hint">（含自己，全部一起來的人數）</span></label>
-          <input type="number" id="people" name="people" min="1" max="20" step="1" value="1" inputmode="numeric">
-          <p class="err-msg">請填寫 1～20 之間的人數</p>
-        </div>
-
-        <div class="field" data-field="referrer">
-          <label for="referrer">介紹人</label>
-          <input type="text" id="referrer" name="referrer" placeholder="是誰邀請您來的？（沒有可留空）">
-        </div>
-
-        <fieldset class="field" data-field="source">
-          <legend>從哪裡得知這個活動？<span class="req">*</span></legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="source" value="facebook"><span>Facebook</span></label>
-            <label class="chip"><input type="radio" name="source" value="instagram"><span>Instagram</span></label>
-            <label class="chip"><input type="radio" name="source" value="line"><span>LINE 群組</span></label>
-            <label class="chip"><input type="radio" name="source" value="friend"><span>親友介紹</span></label>
-            <label class="chip"><input type="radio" name="source" value="poster"><span>海報傳單</span></label>
-            <label class="chip"><input type="radio" name="source" value="other"><span>其他</span></label>
-          </div>
-          <input type="text" class="other-input" id="sourceOther" name="source_other" placeholder="請說明">
-          <p class="err-msg">請選擇一個選項</p>
-        </fieldset>
-
-        <div class="field" data-field="email">
-          <label for="email">有需要用 email 提醒你嗎？<span class="hint">（選填）</span></label>
-          <input type="email" id="email" name="email" placeholder="需要提醒的話，請留下 email" autocomplete="email">
-          <p class="err-msg">email 格式好像不太對</p>
-        </div>
-
-        <fieldset class="field" data-field="attendance">
-          <legend>是否參加夜觀陸蟹？<span class="req">*</span></legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="attendance" value="viewing_only"><span>只觀影不參加夜觀陸蟹</span></label>
-            <label class="chip"><input type="radio" name="attendance" value="both"><span>兩者都會參加</span></label>
-          </div>
-          <p class="err-msg">請選擇是否參加夜觀陸蟹</p>
-        </fieldset>
-
-        <div class="field" data-field="shoes" hidden>
-          <label class="check">
-            <input type="checkbox" name="shoes_ack" id="shoes" value="1">
-            <span class="box"><svg viewBox="0 0 14 10" fill="none" stroke-width="2.2"><path d="M1 5l4 4 8-8"/></svg></span>
-            <span>我會穿布鞋、長褲，有頭燈會記得帶頭燈<span class="req">*</span></span>
-          </label>
-          <p class="err-msg">請勾選</p>
-        </div>
-
-        <div class="field" data-field="photo">
-          <label class="check">
-            <input type="checkbox" name="photo_consent" id="photo" value="1">
-            <span class="box"><svg viewBox="0 0 14 10" fill="none" stroke-width="2.2"><path d="M1 5l4 4 8-8"/></svg></span>
-            <span>我同意現場拍攝<span class="req">*</span></span>
-          </label>
-          <p class="err-msg">請勾選</p>
-        </div>
-
-        <p class="privacy-note">送出報名即表示您已閱讀並同意<a href="#privacy" data-open="privacy">隱私權說明</a>，您填寫的資料僅用於本次活動。</p>
-        <button type="submit" class="btn btn--moon submit" id="submitBtn">送出報名</button>
-      </form>
-
-      <div class="success" id="success">
+      <div class="success show">
         <div class="success__moon"></div>
-        <h3>報名成功</h3>
-        <p>11 月 14 日下午四點，我們在大坑罟等你。<br><span id="successShoesNote">記得穿布鞋、長褲，有頭燈就帶上 🔦</span></p>
+        <h3>謝謝你與海有約</h3>
+        <p>今年的活動已圓滿結束，感謝每一位來到大坑罟的你。<br>追蹤影像宜蘭，期待明年再見 🌊</p>
+        <p style="margin-top:28px"><a href="https://www.facebook.com/projectyilan" target="_blank" rel="noopener" class="btn btn--moon">追蹤影像宜蘭 →</a></p>
       </div>
     </div>
   </section>
@@ -807,106 +734,6 @@ document.querySelectorAll('[data-open]').forEach(a => a.addEventListener('click'
 document.querySelectorAll('dialog.legal').forEach(d => {
   d.querySelector('.legal__close').addEventListener('click', () => d.close());
   d.addEventListener('click', e => { if (e.target === d) d.close(); }); // 點背景關閉
-});
-
-/* ---------- 表單 ---------- */
-const form = document.getElementById('signupForm');
-const sourceOther = document.getElementById('sourceOther');
-const shoesField = form.querySelector('[data-field="shoes"]');
-const shoesCheckbox = form.elements.shoes_ack;
-
-form.querySelectorAll('input[name=source]').forEach(r =>
-  r.addEventListener('change', () => {
-    sourceOther.classList.toggle('show', r.value === 'other' && r.checked);
-    if (r.value === 'other') sourceOther.focus();
-  })
-);
-form.querySelectorAll('input[name=attendance]').forEach(r =>
-  r.addEventListener('change', () => {
-    const joiningNightWatch = r.value === 'both' && r.checked;
-    shoesField.hidden = !joiningNightWatch;
-    if (!joiningNightWatch) {
-      shoesCheckbox.checked = false;
-      shoesField.classList.remove('error');
-    }
-    r.closest('[data-field="attendance"]').classList.remove('error');
-  })
-);
-form.addEventListener('input', e => e.target.closest('.field')?.classList.remove('error'));
-
-function validate(){
-  const attendance = form.querySelector('input[name=attendance]:checked')?.value;
-  const rules = {
-    name:   () => form.name.value.trim() !== '',
-    people: () => { const n = Number(form.people.value); return Number.isInteger(n) && n >= 1 && n <= 20; },
-    source: () => !!form.querySelector('input[name=source]:checked'),
-    email:  () => { const v = form.email.value.trim(); return v === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); },
-    attendance: () => !!attendance,
-    shoes:  () => attendance !== 'both' || shoesCheckbox.checked,
-    photo:  () => form.photo_consent.checked,
-  };
-  let firstBad = null;
-  for (const [key, ok] of Object.entries(rules)) {
-    const field = form.querySelector(`[data-field="${key}"]`);
-    const pass = ok();
-    field.classList.toggle('error', !pass);
-    if (!pass) {
-      // 重新觸發抖動動畫
-      field.style.animation = 'none'; field.offsetHeight; field.style.animation = '';
-      firstBad ??= field;
-    }
-  }
-  if (firstBad) firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  return !firstBad;
-}
-
-/* 👉 後台串接：貼上 Google Apps Script 部署後的「網頁應用程式網址」（結尾是 /exec） */
-const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycby1QlKpbiX9Utu4nk2GNC9tF_JUsgqx0CI65ENvYQuM8PShwnaIlLucqpeFmP5ezwI/exec';
-
-async function submitToServer(data){
-  if (!SHEET_API_URL) throw new Error('還沒設定 SHEET_API_URL');
-  // 用 text/plain 送，瀏覽器才不會先發 CORS 預檢請求（Apps Script 不支援預檢）
-  const res = await fetch(SHEET_API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(data)
-  });
-  const result = await res.json();
-  if (!result.ok) throw new Error(result.error || '報名失敗');
-  return result;
-}
-
-form.addEventListener('submit', async e => {
-  e.preventDefault();
-  if (!validate()) return;
-
-  const fd = new FormData(form);
-  const data = {
-    name: fd.get('name').trim(),
-    people: Number(fd.get('people')),
-    referrer: (fd.get('referrer') || '').trim(),
-    source: fd.get('source'),
-    source_other: fd.get('source') === 'other' ? (fd.get('source_other') || '').trim() : '',
-    email: (fd.get('email') || '').trim(),
-    email_reminder: (fd.get('email') || '').trim() !== '',
-    attendance: fd.get('attendance'),
-    shoes_ack: fd.get('attendance') === 'both' && shoesCheckbox.checked,
-    photo_consent: true,
-    submitted_at: new Date().toISOString(),
-  };
-
-  const btn = document.getElementById('submitBtn');
-  btn.classList.add('loading');
-  try {
-    await submitToServer(data);
-    document.getElementById('successShoesNote').hidden = data.attendance !== 'both';
-    form.style.display = 'none';
-    document.getElementById('success').classList.add('show');
-  } catch (err) {
-    alert('送出失敗，請稍後再試');
-  } finally {
-    btn.classList.remove('loading');
-  }
 });
 </script>
 </body>
